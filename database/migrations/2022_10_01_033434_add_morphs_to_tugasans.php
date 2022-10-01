@@ -13,9 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('father_bunch_disposals', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+        Schema::table('tugasans', function (Blueprint $table) {
+            $table->morphs('taskable');
         });
     }
 
@@ -26,6 +25,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('father_bunch_disposals');
+        Schema::table('tugasans', function (Blueprint $table) {
+            //
+        });
     }
 };

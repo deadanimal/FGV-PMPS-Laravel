@@ -2,107 +2,71 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreBaggingDataRequest;
-use App\Http\Requests\UpdateBaggingDataRequest;
+use App\Http\Requests\Request;
 use App\Models\BaggingData;
+use App\Models\Gambar;
 
 class BaggingDataController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function senarai_bagging(Request $request)
     {
-        //
+        $baggings = BaggingData::all();
+        return view('bagging.senarai', compact('baggings'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function butir_bagging($id)
     {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreBaggingDataRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StoreBaggingDataRequest $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\BaggingData  $baggingData
-     * @return \Illuminate\Http\Response
-     */
-    public function show(BaggingData $baggingData)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\BaggingData  $baggingData
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(BaggingData $baggingData)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateBaggingDataRequest  $request
-     * @param  \App\Models\BaggingData  $baggingData
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateBaggingDataRequest $request, BaggingData $baggingData)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\BaggingData  $baggingData
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(BaggingData $baggingData)
-    {
-        //
-    }
-
-    public function scan_qr(Request $request)
-    {
-        //
+        $bagging = BaggingData::find($id);
+        return view('bagging.butir', compact('bagging'));
     }   
-    
-    public function generate_qr(Request $request)
-    {
-        //
-    }    
 
-    public function upload_gambar(Request $request)
+    public function cipta_bagging(Request $request)
     {
-        //
+        $user = $request->user();
+        $user_id = $user->id;
+
+        $bagging = New bagging;
+
+        $bagging->jenis = $request->jenis;
+        $bagging->no_bagging = $request->no_bagging;
+        $bagging->pokok_id = $request->pokok_id;
+        $bagging->tandan_id = $request->tandan_id;
+        $bagging->catatan_bagging = $request->catatan_bagging;
+
+        $bagging->save();
+
+        activity()
+        ->causedBy($user)
+        ->performedOn($bagging)
+        ->log('Cipta');
+                
+        $url = '/bagging/'.$bagging->id;
+        return Redirect($url);
     }  
     
-    public function hantar_borang(Request $request)
+    public function ubah_bagging($id, Request $request)
     {
-        //
-    }     
+        $user = $request->user();
+        $user_id = $user->id;
+
+        $bagging = BaggingData::find($id);
+        $bagging->jenis = $request->jenis;
+        $bagging->no_bagging = $request->no_bagging;
+        $bagging->pokok_id = $request->pokok_id;
+        $bagging->tandan_id = $request->tandan_id;
+        $bagging->catatan_bagging = $request->catatan_bagging;
+        $bagging->tugasan_id = $request->tugasan_id;
+
+        $bagging->save();  
+        
+        activity()
+        ->causedBy($user)
+        ->performedOn($bagging)
+        ->log('Ubah');
+
+        return view('bagging.butir', compact('bagging'));        
+    }    
+        
 
 
 }

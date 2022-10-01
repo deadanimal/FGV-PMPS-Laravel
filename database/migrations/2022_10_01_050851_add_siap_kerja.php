@@ -13,9 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('mother_harvests', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+
+        Schema::table('bagging_data', function (Blueprint $table) {
+            $table->foreignId('tugasan_id')->constrained('tugasans')->nullable();            
+        });
+
+        Schema::table('gambars', function (Blueprint $table) {
+            $table->string('jalan')->nullable();
         });
     }
 
@@ -26,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('mother_harvests');
+        //
     }
 };

@@ -8,79 +8,68 @@ use App\Models\QualityControl;
 
 class QualityControlController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function senarai_qc(Request $request)
     {
-        //
+        $qcs = QualityControl::all();
+        return view('qc.senarai', compact('qcs'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function butir_qc($id)
     {
-        //
-    }
+        $qc = QualityControl::find($id);
+        return view('qc.butir', compact('qc'));
+    }   
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreQualityControlRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StoreQualityControlRequest $request)
+    public function cipta_qc(Request $request)
     {
-        //
-    }
+        $user_id = $request->user()->id;
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\QualityControl  $qualityControl
-     * @return \Illuminate\Http\Response
-     */
-    public function show(QualityControl $qualityControl)
-    {
-        //
-    }
+        $qc = New QualityControl;
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\QualityControl  $qualityControl
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(QualityControl $qualityControl)
-    {
-        //
-    }
+        $qc->jenis = $request->jenis;
+        $qc->no_qc = $request->no_qc;
+        $qc->pokok_id = $request->pokok_id;
+        $qc->tandan_id = $request->tandan_id;
+        $qc->catatan_qc = $request->catatan_qc;
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateQualityControlRequest  $request
-     * @param  \App\Models\QualityControl  $qualityControl
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateQualityControlRequest $request, QualityControl $qualityControl)
-    {
-        //
-    }
+        $qc->status_bunga = $request->status_bunga;
+        $qc->status_qc = $request->status_qc;
+        $qc->jumlah_bagging = $request->jumlah_bagging;
+        $qc->jumlah_bagging_lulus = $request->jumlah_bagging_lulus;
+        $qc->jumlah_bagging_rosak = $request->jumlah_bagging_rosak;
+        $qc->peratus_rosak = $request->peratus_rosak;
+        
+        $qc->tugasan_id = $request->tugasan_id;
+                
+        // $table->foreignId('tugasan_id'
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\QualityControl  $qualityControl
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(QualityControl $qualityControl)
+        $qc->save();
+        $url = '/qc/'.$qc->id;
+        return Redirect($url);
+    }  
+    
+    public function ubah_qc($id, Request $request)
     {
-        //
-    }
+        $user_id = $request->user()->id;
+
+        $qc = QualityControl::find($id);
+        
+        $qc->jenis = $request->jenis;
+        $qc->no_qc = $request->no_qc;
+        $qc->pokok_id = $request->pokok_id;
+        $qc->tandan_id = $request->tandan_id;
+        $qc->catatan_qc = $request->catatan_qc;
+
+        $qc->status_bunga = $request->status_bunga;
+        $qc->status_qc = $request->status_qc;
+        $qc->jumlah_bagging = $request->jumlah_bagging;
+        $qc->jumlah_bagging_lulus = $request->jumlah_bagging_lulus;
+        $qc->jumlah_bagging_rosak = $request->jumlah_bagging_rosak;
+        $qc->peratus_rosak = $request->peratus_rosak;
+        
+        $qc->tugasan_id = $request->tugasan_id;
+
+        $qc->save();        
+        return view('qc.butir', compact('qc'));        
+    }   
 }

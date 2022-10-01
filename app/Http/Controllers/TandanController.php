@@ -8,99 +8,49 @@ use App\Models\Tandan;
 
 class TandanController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+
+    public function senarai_tandan(Request $request)
     {
-        //
+        $tandans = Tandan::all();
+        return view('tandan.senarai', compact('tandans'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function butir_tandan($id)
     {
-        //
-    }
+        $tandan = Tandan::find($id);
+        return view('tandan.butir', compact('tandan'));
+    }   
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreTandanRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StoreTandanRequest $request)
+    public function cipta_tandan(Request $request)
     {
-        //
-    }
+        $user_id = $request->user()->id;
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Tandan  $tandan
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Tandan $tandan)
-    {
-        //
-    }
+        $tandan = New Tandan;    
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Tandan  $tandan
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Tandan $tandan)
-    {
-        //
-    }
+        $tandan->no_daftar = $request->no_daftar;
+        $tandan->tandan_id = $request->tandan_id;
+        
+        $tandan->kitaran = $request->kitaran;
+        $tandan->deskripsi_kitaran = $request->deskripsi_kitaran;
+        $tandan->status_tandan = $request->status_tandan;
+        $tandan->catatan = $request->catatan;
+        $tandan->umur = $request->umur;
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateTandanRequest  $request
-     * @param  \App\Models\Tandan  $tandan
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateTandanRequest $request, Tandan $tandan)
-    {
-        //
-    }
+        $tandan->save();
+        $url = '/tandan/'.$tandan->id;
+        return Redirect($url);
+    }  
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Tandan  $tandan
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Tandan $tandan)
+    public function buang_tandan($id)
     {
-        //
-    }
-
-    public function generate_qr(Tandan $tandan)
-    {
-        //
-    }    
-
-    public function scan_qr(Tandan $tandan)
-    {
-        //
+        $tandan = Tandan::find($id);
+        return view('tandan.butir', compact('tandan'));
     }  
     
-    public function show_form(Tandan $tandan)
+    public function sah_buang_tandan($id)
     {
-        //
-    }  
-    
-    public function submit_form(Tandan $tandan)
-    {
-        //
-    }          
+        $tandan = Tandan::find($id);
+        return view('tandan.butir', compact('tandan'));
+    }      
+         
 }

@@ -2,54 +2,58 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StorePokokRequest;
-use App\Http\Requests\UpdatePokokRequest;
+use App\Http\Requests\Request;
 use App\Models\Pokok;
 
 class PokokController extends Controller
 {
-    public function index()
+
+    public function senarai_pokok(Request $request)
     {
-        //
+        $pokoks = Pokok::all();
+        return view('pokok.senarai', compact('pokoks'));
     }
 
-    public function create()
+    public function butir_pokok($id)
     {
-        //
-    }
+        $pokok = Pokok::find($id);
+        return view('pokok.butir', compact('pokok'));
+    }   
 
-    public function store(StorePokokRequest $request)
+    public function cipta_pokok(Request $request)
     {
-        //
-    }
+        $user_id = $request->user()->id;
 
-    public function show(Pokok $pokok)
-    {
-        //
-    }
+        $pokok = New Pokok;
 
-    public function edit(Pokok $pokok)
-    {
-        //
-    }
+        $pokok->no_pokok = $request->no_pokok;
+        $pokok->jantina = $request->jantina;
+        $pokok->baka = $request->baka;
+        $pokok->progeny = $request->progeny;
+        $pokok->blok = $request->blok;
+        $pokok->trial = $request->trial;
+        $pokok->status_pokok = $request->status_pokok;
 
-    public function update(UpdatePokokRequest $request, Pokok $pokok)
-    {
-        //
-    }
-
-    public function destroy(Pokok $pokok)
-    {
-        //
-    }
-
-    public function generate_qr(Pokok $pokok)
-    {
-        //
+        $pokok->save();
+        $url = '/pokok/'.$pokok->id;
+        return Redirect($url);
     }  
     
-    public function scan_qr(Pokok $pokok)
+    public function ubah_pokok($id, Request $request)
     {
-        //
+        $user_id = $request->user()->id;
+
+        $pokok = Pokok::find($id);
+        $pokok->no_pokok = $request->no_pokok;
+        $pokok->jantina = $request->jantina;
+        $pokok->baka = $request->baka;
+        $pokok->progeny = $request->progeny;
+        $pokok->blok = $request->blok;
+        $pokok->trial = $request->trial;
+        $pokok->status_pokok = $request->status_pokok;
+
+        $pokok->save();        
+        return view('pokok.butir', compact('pokok'));        
     }      
+   
 }

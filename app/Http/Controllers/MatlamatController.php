@@ -8,79 +8,52 @@ use App\Models\Matlamat;
 
 class MatlamatController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+
+    public function senarai_matlamat(Request $request)
     {
-        //
+        $matlamats = matlamat::all();
+        return view('matlamat.senarai', compact('matlamats'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function butir_matlamat($id)
     {
-        //
-    }
+        $matlamat = matlamat::find($id);
+        return view('matlamat.butir', compact('matlamat'));
+    }   
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreMatlamatRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StoreMatlamatRequest $request)
+    public function cipta_matlamat(Request $request)
     {
-        //
-    }
+        $user_id = $request->user()->id;
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Matlamat  $matlamat
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Matlamat $matlamat)
-    {
-        //
-    }
+        $matlamat = New matlamat;
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Matlamat  $matlamat
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Matlamat $matlamat)
-    {
-        //
-    }
+        $matlamat->proses = $request->proses;
+        $matlamat->tahun = $request->tahun;
+        $matlamat->matlamat_tahunan = $request->matlamat_tahunan;
+        $matlamat->bulan = $request->bulan;
+        $matlamat->matlamat_bulanan = $request->matlamat_bulanan;
+                
+        // $table->foreignId('tugasan_id'
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateMatlamatRequest  $request
-     * @param  \App\Models\Matlamat  $matlamat
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateMatlamatRequest $request, Matlamat $matlamat)
+        $matlamat->save();
+        $url = '/matlamat/'.$matlamat->id;
+        return Redirect($url);
+    }  
+    
+    public function ubah_matlamat($id, Request $request)
     {
-        //
-    }
+        $user_id = $request->user()->id;
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Matlamat  $matlamat
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Matlamat $matlamat)
-    {
-        //
-    }
+        $matlamat = Matlamat::find($id);
+        
+        $matlamat->proses = $request->proses;
+        $matlamat->tahun = $request->tahun;
+        $matlamat->matlamat_tahunan = $request->matlamat_tahunan;
+        $matlamat->bulan = $request->bulan;
+        $matlamat->matlamat_bulanan = $request->matlamat_bulanan;
+
+        $matlamat->save();        
+        return view('matlamat.butir', compact('matlamat'));        
+    }   
+
 }

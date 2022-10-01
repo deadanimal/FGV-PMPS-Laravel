@@ -8,79 +8,47 @@ use App\Models\Kerosakan;
 
 class KerosakanController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+
+    public function senarai_kerosakan(Request $request)
     {
-        //
+        $kerosakans = Kerosakan::all();
+        return view('kerosakan.senarai', compact('kerosakans'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function butir_kerosakan($id)
     {
-        //
-    }
+        $kerosakan = Kerosakan::find($id);
+        return view('kerosakan.butir', compact('kerosakan'));
+    }   
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreKerosakanRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StoreKerosakanRequest $request)
+    public function cipta_kerosakan(Request $request)
     {
-        //
-    }
+        $user_id = $request->user()->id;
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Kerosakan  $kerosakan
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Kerosakan $kerosakan)
-    {
-        //
-    }
+        $kerosakan = New kerosakan;
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Kerosakan  $kerosakan
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Kerosakan $kerosakan)
-    {
-        //
-    }
+        $kerosakan->nama = $request->nama;
+        $kerosakan->jenis = $request->jenis;
+        $kerosakan->tandan_id = $request->tandan_id;
+                
+        // $table->foreignId('tugasan_id'
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateKerosakanRequest  $request
-     * @param  \App\Models\Kerosakan  $kerosakan
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateKerosakanRequest $request, Kerosakan $kerosakan)
+        $kerosakan->save();
+        $url = '/kerosakan/'.$kerosakan->id;
+        return Redirect($url);
+    }  
+    
+    public function ubah_kerosakan($id, Request $request)
     {
-        //
-    }
+        $user_id = $request->user()->id;
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Kerosakan  $kerosakan
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Kerosakan $kerosakan)
-    {
-        //
-    }
+        $kerosakan = Kerosakan::find($id);
+        
+        $kerosakan->nama = $request->nama;
+        $kerosakan->jenis = $request->jenis;
+        $kerosakan->tandan_id = $request->tandan_id;
+
+        $kerosakan->save();        
+        return view('kerosakan.butir', compact('kerosakan'));        
+    }   
 }

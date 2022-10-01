@@ -8,99 +8,70 @@ use App\Models\Harvest;
 
 class HarvestController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreHarvestRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StoreHarvestRequest $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Harvest  $harvest
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Harvest $harvest)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Harvest  $harvest
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Harvest $harvest)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateHarvestRequest  $request
-     * @param  \App\Models\Harvest  $harvest
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateHarvestRequest $request, Harvest $harvest)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Harvest  $harvest
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Harvest $harvest)
-    {
-        //
-    }
-
-    public function scan_qr(Request $request)
-    {
-        //
-    }   
     
-    public function generate_qr(Request $request)
+    public function senarai_harvest(Request $request)
     {
-        //
-    }    
+        $harvests = Harvest::all();
+        return view('harvest.senarai', compact('harvests'));
+    }
 
-    public function upload_gambar(Request $request)
+    public function butir_harvest($id)
     {
-        //
+        $harvest = Harvest::find($id);
+        return view('harvest.butir', compact('harvest'));
+    }   
+
+    public function cipta_harvest(Request $request)
+    {
+        $user = $request->user();
+        $user_id = $user->id;
+
+        $harvest = New harvest;
+
+        $harvest->jenis = $request->jenis;
+        $harvest->no_harvest = $request->no_harvest;
+        $harvest->pokok_id = $request->pokok_id;
+        $harvest->tandan_id = $request->tandan_id;
+        $harvest->catatan_harvest = $request->catatan_harvest;
+
+        $harvest->berat_tandan = $request->berat_tandan;
+        $harvest->jumlah_tandan = $request->jumlah_tandan;
+                
+        // $table->foreignId('tugasan_id'
+
+        $harvest->save();
+
+        activity()
+        ->causedBy($user)
+        ->performedOn($harvest)
+        ->log('Cipta');
+
+        $url = '/harvest/'.$harvest->id;
+        return Redirect($url);
     }  
     
-    public function hantar_borang(Request $request)
+    public function ubah_harvest($id, Request $request)
     {
-        //
-    }       
+        $user = $request->user();
+        $user_id = $user->id;
+
+        $harvest = Harvest::find($id);
+        $harvest->jenis = $request->jenis;
+        $harvest->no_harvest = $request->no_harvest;
+        $harvest->pokok_id = $request->pokok_id;
+        $harvest->tandan_id = $request->tandan_id;
+        $harvest->catatan_harvest = $request->catatan_harvest;
+
+        $harvest->berat_tandan = $request->berat_tandan;
+        $harvest->jumlah_tandan = $request->jumlah_tandan;
+
+        $harvest->save();     
+        
+        activity()
+        ->causedBy($user)
+        ->performedOn($harvest)
+        ->log('Ubah');
+
+        return view('harvest.butir', compact('harvest'));        
+    }         
 }

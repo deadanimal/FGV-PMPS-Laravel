@@ -8,79 +8,33 @@ use App\Models\Gambar;
 
 class GambarController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function upload_gambar(Request $request)
     {
-        //
-    }
+        $user = $request->user();
+        $user_id = $user->id;
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreGambarRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StoreGambarRequest $request)
-    {
-        //
-    }
+        $request->validate([
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:4096',
+        ]);
+        $image_name = time().'.'.$request->image->extension();  
+        $request->image->move(public_path('images'), $image_name);
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Gambar  $gambar
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Gambar $gambar)
-    {
-        //
-    }
+        $gambar = New Gambar;
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Gambar  $gambar
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Gambar $gambar)
-    {
-        //
-    }
+        $gambar->nama = $request->nama;
+        $gambar->user_id = $request->user_id;
+        $gambar->uploadable_id = $request->uploadable_id;
+        $gambar->uploadable_type = $request->uploadable_type;   
+        $gambar->jalan = $image_name;   
+        $gambar->save();
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateGambarRequest  $request
-     * @param  \App\Models\Gambar  $gambar
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateGambarRequest $request, Gambar $gambar)
-    {
-        //
-    }
+        activity()
+        ->causedBy($user)
+        ->performedOn($gambar)
+        ->log('Ubah');        
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Gambar  $gambar
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Gambar $gambar)
-    {
-        //
-    }
+        return back()
+            ->with('success','You have successfully upload image.');
+    }  
 }

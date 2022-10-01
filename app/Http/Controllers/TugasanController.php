@@ -2,90 +2,102 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreTugasanRequest;
-use App\Http\Requests\UpdateTugasanRequest;
+use App\Http\Requests\Request;
 use App\Models\Tugasan;
 
 class TugasanController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
+    public function senarai_tugasan(Request $request)
+    {    
+        $user_id = $request->user()->id;
+        if($user->hasRole('worker')) {
+            $tugasans = Tugasan::where('assignee_id', $user_id)->get();
+        } else {
+            $tugasans = Tugasan::where('assigner_id', $user_id)->get();
+        }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreTugasanRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StoreTugasanRequest $request)
-    {
-        //
-    }
+        return view('tugasan.senarai', compact('tugasans'));
+    } 
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Tugasan  $tugasan
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Tugasan $tugasan)
+    public function butir_tugasan($id)
     {
-        //
-    }
+        $tugasan = Tugasan::findOrFail($id);
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Tugasan  $tugasan
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Tugasan $tugasan)
+        return view('tugasan.butir', compact('tugasan'));
+    }   
+    
+    public function cipta_tugasan(Request $request)
     {
-        //
-    }
+        $user_id = $request->user()->id;
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateTugasanRequest  $request
-     * @param  \App\Models\Tugasan  $tugasan
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateTugasanRequest $request, Tugasan $tugasan)
-    {
-        //
-    }
+        $validatedData = $request->validate([
+            'fiat_amount' => ['required', 'gte:20.00', 'lte:50000.00'],
+        ]);   
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Tugasan  $tugasan
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Tugasan $tugasan)
+        $tugasan = New Tugasan;
+
+        $tugasan->no_tugasan = $request->no_tugasan;
+        $tugasan->nama_tugasan = $request->nama_tugasan;
+
+        $tugasan->assigner_id = $user_id;
+        
+        $tugasan->tarikh_kerja_mula = $request->tarikh_kerja_mula;
+        //$tugasan->tarikh_kerja_habis = $request->tarikh_kerja_habis;
+
+        //$tugasan->siap_kerja = $request->siap_kerja;
+        //$tugasan->catatan_siap_kerja = $request->catatan_siap_kerja;
+
+        //$tugasan->sah = $request->sah;
+        //$tugasan->pengesah_id = $request->pengesah_id;
+        //$tugasan->catatan_pengesah = $request->catatan_pengesah;
+        
+        $tugasan->save();
+        
+        $url = '/tugasan/'.$tugasan->id;
+        return Redirect($url);
+    }    
+    
+    public function ubah_tugasan($id, Request $request)
     {
-        //
-    }
+        $user_id = $request->user()->id;
+
+        $tugasan = Tugasan::find($id);
+
+        $tugasan->no_tugasan = $request->no_tugasan;
+        $tugasan->nama_tugasan = $request->nama_tugasan;
+
+        $tugasan->assignee_id = $request->assignee_id;
+        $tugasan->assigner_id = $request->assigner_id;
+        
+        $tugasan->tarikh_kerja_mula = $request->tarikh_kerja_mula;
+        $tugasan->tarikh_kerja_habis = $request->tarikh_kerja_habis;
+
+        $tugasan->siap_kerja = $request->siap_kerja;
+        $tugasan->catatan_siap_kerja = $request->catatan_siap_kerja;
+
+        $tugasan->sah = $request->sah;
+        $tugasan->pengesah_id = $request->pengesah_id;
+        $tugasan->catatan_pengesah = $request->catatan_pengesah;
+        
+        $tugasan->save();
+
+        $url = '/tugasan/'.$tugasan->id;
+        return Redirect($url);        
+    }     
+    
+    public function siap_tugasan(Request $request)
+    {
+        $user_id = $request->user()->id;
+        $url = '/tugasan/'.$tugasan->id;
+        return Redirect($url);        
+    }      
+    
 
     public function sah_tugasan(Request $request)
     {
-        //
+        $user_id = $request->user()->id;
+        $url = '/tugasan/'.$tugasan->id;
+        return Redirect($url);        
     }    
 }

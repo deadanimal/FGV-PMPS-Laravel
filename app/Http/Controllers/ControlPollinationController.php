@@ -8,99 +8,76 @@ use App\Models\ControlPollination;
 
 class ControlPollinationController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+
+    public function senarai_control(Request $request)
     {
-        //
+        $controls = ControlPollination::all();
+        return view('control.senarai', compact('controls'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function butir_control($id)
     {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreControlPollinationRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StoreControlPollinationRequest $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\ControlPollination  $controlPollination
-     * @return \Illuminate\Http\Response
-     */
-    public function show(ControlPollination $controlPollination)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\ControlPollination  $controlPollination
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(ControlPollination $controlPollination)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateControlPollinationRequest  $request
-     * @param  \App\Models\ControlPollination  $controlPollination
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateControlPollinationRequest $request, ControlPollination $controlPollination)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\ControlPollination  $controlPollination
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(ControlPollination $controlPollination)
-    {
-        //
-    }
-
-    public function scan_qr(Request $request)
-    {
-        //
+        $control = ControlPollination::find($id);
+        return view('control.butir', compact('control'));
     }   
-    
-    public function generate_qr(Request $request)
-    {
-        //
-    }    
 
-    public function upload_gambar(Request $request)
+    public function cipta_control(Request $request)
     {
-        //
+        $user = $request->user();
+        $user_id = $user->id;
+
+        $control = New ControlPollination;
+
+        $control->jenis = $request->jenis;
+        $control->no_cp = $request->no_cp;
+        $control->pokok_id = $request->pokok_id;
+        $control->tandan_id = $request->tandan_id;
+        $control->catatan_cp = $request->catatan_cp;
+
+        $control->bil_pemeriksaan = $request->bil_pemeriksaan;
+        $control->tambahan_hari = $request->tambahan_hari;
+        $control->no_pollen = $request->no_pollen;
+        $control->peratus_pollen = $request->peratus_pollen;
+                
+        // $table->foreignId('tugasan_id'
+
+        $control->save();
+
+        activity()
+        ->causedBy($user)
+        ->performedOn($control)
+        ->log('Cipta');
+
+
+        $url = '/control/'.$control->id;
+        return Redirect($url);
     }  
     
-    public function hantar_borang(Request $request)
+    public function ubah_control($id, Request $request)
     {
-        //
-    }       
+        $user = $request->user();
+        $user_id = $user->id;
+
+        $control = ControlPollination::find($id);
+        $control->jenis = $request->jenis;
+        $control->no_cp = $request->no_cp;
+        $control->pokok_id = $request->pokok_id;
+        $control->tandan_id = $request->tandan_id;
+        $control->catatan_cp = $request->catatan_cp;
+
+        $control->bil_pemeriksaan = $request->bil_pemeriksaan;
+        $control->tambahan_hari = $request->tambahan_hari;
+        $control->no_pollen = $request->no_pollen;
+        $control->peratus_pollen = $request->peratus_pollen;
+
+        $control->save(); 
+        
+        activity()
+        ->causedBy($user)
+        ->performedOn($control)
+        ->log('Ubah');
+
+        return view('control.butir', compact('control'));        
+    }    
+          
 }
