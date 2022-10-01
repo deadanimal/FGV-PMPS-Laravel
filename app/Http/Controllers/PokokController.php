@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Request;
+use Illuminate\Http\Request;
 use App\Models\Pokok;
 
 class PokokController extends Controller

@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreKerosakanRequest;
-use App\Http\Requests\UpdateKerosakanRequest;
+use Illuminate\Http\Request;
 use App\Models\Kerosakan;
 
 class KerosakanController extends Controller
@@ -43,7 +42,7 @@ class KerosakanController extends Controller
         $user_id = $request->user()->id;
 
         $kerosakan = Kerosakan::find($id);
-        
+
         $kerosakan->nama = $request->nama;
         $kerosakan->jenis = $request->jenis;
         $kerosakan->tandan_id = $request->tandan_id;

@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreQualityControlRequest;
-use App\Http\Requests\UpdateQualityControlRequest;
+use Illuminate\Http\Request;
 use App\Models\QualityControl;
 
 class QualityControlController extends Controller

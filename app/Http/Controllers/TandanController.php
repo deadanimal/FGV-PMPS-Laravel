@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreTandanRequest;
-use App\Http\Requests\UpdateTandanRequest;
+use Illuminate\Http\Request;
 use App\Models\Tandan;
 
 class TandanController extends Controller

@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreGambarRequest;
-use App\Http\Requests\UpdateGambarRequest;
+use Illuminate\Http\Request;
 use App\Models\Gambar;
 
 class GambarController extends Controller

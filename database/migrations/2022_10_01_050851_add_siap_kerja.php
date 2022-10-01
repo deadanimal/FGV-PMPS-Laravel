@@ -13,11 +13,6 @@ return new class extends Migration
      */
     public function up()
     {
-
-        Schema::table('bagging_data', function (Blueprint $table) {
-            $table->foreignId('tugasan_id')->constrained('tugasans')->nullable();            
-        });
-
         Schema::table('gambars', function (Blueprint $table) {
             $table->string('jalan')->nullable();
         });

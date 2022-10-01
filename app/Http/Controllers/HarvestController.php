@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreHarvestRequest;
-use App\Http\Requests\UpdateHarvestRequest;
+use Illuminate\Http\Request;
 use App\Models\Harvest;
 
 class HarvestController extends Controller

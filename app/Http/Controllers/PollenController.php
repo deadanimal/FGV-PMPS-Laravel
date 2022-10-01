@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StorePollenRequest;
-use App\Http\Requests\UpdatePollenRequest;
+use Illuminate\Http\Request;
 use App\Models\Pollen;
 
 class PollenController extends Controller

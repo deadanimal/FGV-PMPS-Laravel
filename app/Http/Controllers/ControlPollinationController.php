@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreControlPollinationRequest;
-use App\Http\Requests\UpdateControlPollinationRequest;
+use Illuminate\Http\Request;
 use App\Models\ControlPollination;
 
 class ControlPollinationController extends Controller
