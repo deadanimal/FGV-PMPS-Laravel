@@ -7,7 +7,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<meta name="description" content="Modern and advanced gold market">
 	<meta name="author" content="PMPS">
-    <link rel="icon" type="image/png" href="/img/gold-bars.png" />
+    <!-- <link rel="icon" type="image/png" href="/img/gold-bars.png" /> -->
 
 	<title>PMPS - @yield('title')</title>
 
@@ -28,9 +28,9 @@
 
 		<nav id="sidebar" class="sidebar">
 			<a class="sidebar-brand" href="/app">
-				<!-- <svg>
+				 <svg>
 					<use xlink:href="#ion-ios-pulse-strong"></use>
-				</svg> -->
+				</svg>
 				PMPS
 			</a>
 			<div class="sidebar-content">
@@ -57,16 +57,16 @@
 					</li>	
 					
 					<li class="sidebar-item">
-						<a class="sidebar-link" href="/profile">
-							<span class="align-middle">Profile</span>
+						<a class="sidebar-link" href="/profil">
+							<span class="align-middle">Profil</span>
 						</a>
-					</li>	
-
+					</li>	    
+					
 					<li class="sidebar-item">
-						<a class="sidebar-link" href="/trail">
-							<span class="align-middle">Trail</span>
+						<a class="sidebar-link" href="/user">
+							<span class="align-middle">User</span>
 						</a>
-					</li>                    
+					</li>						
 
                     <li class="sidebar-header">
 						Mobile
@@ -128,9 +128,6 @@
 								<i class="align-middle fas fa-cog"></i>
 							</a>
 							<div class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">								
-                                <a class="dropdown-item" href="/app/support"><i class="align-middle me-1 fas fa-fw fa-life-ring"></i>Support</a>
-                                <a class="dropdown-item" href="/app/profile"><i class="align-middle me-1 fas fa-fw fa-user"></i>Profile</a>
-								<div class="dropdown-divider"></div>
 								<a class="dropdown-item" href="/logout"><i class="align-middle me-1 fas fa-fw fa-arrow-alt-circle-right"></i> Sign Out</a>
 							</div>
 						</li>
