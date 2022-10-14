@@ -14,15 +14,17 @@ class PokokController extends Controller
         return view('pokok.senarai', compact('pokoks'));
     }
 
-    public function butir_pokok($id)
+    public function butir_pokok(Request $request)
     {
+        $id = (int)$request->route('id'); 
         $pokok = Pokok::find($id);
         return view('pokok.butir', compact('pokok'));
     }   
 
     public function cipta_pokok(Request $request)
     {
-        $user_id = $request->user()->id;
+        $user = $request->user();
+        $user_id = $user->id;
 
         $pokok = New Pokok;
 
@@ -35,15 +37,15 @@ class PokokController extends Controller
         $pokok->status_pokok = $request->status_pokok;
 
         $pokok->save();
-        $url = '/pokok/'.$pokok->id;
-        return Redirect($url);
+        
+        return back();
     }  
     
-    public function ubah_pokok($id, Request $request)
-    {
-        $user_id = $request->user()->id;
+    public function ubah_pokok(Request $request) {
 
+        $id = (int)$request->route('id'); 
         $pokok = Pokok::find($id);
+        
         $pokok->no_pokok = $request->no_pokok;
         $pokok->jantina = $request->jantina;
         $pokok->baka = $request->baka;
@@ -53,7 +55,7 @@ class PokokController extends Controller
         $pokok->status_pokok = $request->status_pokok;
 
         $pokok->save();        
-        return view('pokok.butir', compact('pokok'));        
+        return back();
     }      
    
 }

@@ -14,20 +14,22 @@ class TandanController extends Controller
         return view('tandan.senarai', compact('tandans'));
     }
 
-    public function butir_tandan($id)
+    public function butir_tandan(Request $request)
     {
+        $id = (int)$request->route('id'); 
         $tandan = Tandan::find($id);
         return view('tandan.butir', compact('tandan'));
     }   
 
     public function cipta_tandan(Request $request)
     {
-        $user_id = $request->user()->id;
+        $user = $request->user();
+        $user_id = $user->id;
 
         $tandan = New Tandan;    
 
         $tandan->no_daftar = $request->no_daftar;
-        $tandan->tandan_id = $request->tandan_id;
+        $tandan->pokok_id = $request->pokok_id;
         
         $tandan->kitaran = $request->kitaran;
         $tandan->deskripsi_kitaran = $request->deskripsi_kitaran;
@@ -36,17 +38,16 @@ class TandanController extends Controller
         $tandan->umur = $request->umur;
 
         $tandan->save();
-        $url = '/tandan/'.$tandan->id;
-        return Redirect($url);
+        return back();
     }  
 
-    public function buang_tandan($id)
+    public function buang_tandan(Request $request)
     {
         $tandan = Tandan::find($id);
         return view('tandan.butir', compact('tandan'));
     }  
     
-    public function sah_buang_tandan($id)
+    public function sah_buang_tandan(Request $request)
     {
         $tandan = Tandan::find($id);
         return view('tandan.butir', compact('tandan'));

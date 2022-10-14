@@ -5,12 +5,10 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<meta name="description" content="Modern and advanced gold market">
-	<meta name="author" content="Gold Panda">
-    <link rel="icon" type="image/png" href="/img/gold-bars.png" />
+	<meta name="author" content="PMPS">
+    <!-- <link rel="icon" type="image/png" href="/img/gold-bars.png" /> -->
 
-	<!-- <title>Gold Panda - @yield('title')</title> -->
-    <title>Gold Panda</title>
+    <title>PMPS</title>
 
 	<link href="{{ URL::asset('css/modern.css') }}" rel="stylesheet">
 
@@ -29,9 +27,9 @@
 					<div class="d-table-cell align-middle">
 
 						<div class="text-center mt-4">
-							<h1 class="h2">Gold Panda</h1>
+							<h1 class="h2">PMPS</h1>
 							<p class="lead">
-                            Modern Gold Platform
+                            - - - -
 
 							</p>
 						</div>
@@ -42,6 +40,9 @@
 									<!-- <div class="text-center">
 										<img src="/img/avatars/avatar.jpg" alt="Linda Miller" class="img-fluid rounded-circle" width="132" height="132" />
 									</div> -->
+                                    {!! QrCode::generate(Request::url('/pokok/1123321321dsadas')); !!}
+                                    {!! QrCode::generate('https://google.com'); !!}
+
                                     <form method="POST" action="{{ route('login') }}">
                                         @csrf
 										<div class="mb-3">
@@ -51,9 +52,9 @@
 										<div class="mb-3">
 											<label>Password</label>
 											<input class="form-control form-control-lg" type="password" name="password" placeholder="Enter your password" />
-											<small>
+											<!-- <small>
 												<a href="{{ route('password.request') }}">Forgot password?</a>
-											</small>
+											</small> -->
 										</div>
 										<div>
 											<div class="form-check align-items-center">
@@ -90,61 +91,3 @@
 </body>
 
 </html>
-
-<!-- <x-guest-layout>
-    <x-auth-card>
-        <x-slot name="logo">
-            <a href="/">
-                <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
-            </a>
-        </x-slot>
-
-        
-        <x-auth-session-status class="mb-4" :status="session('status')" />
-
-        <form method="POST" action="{{ route('login') }}">
-            @csrf
-
-            
-            <div>
-                <x-input-label for="email" :value="__('Email')" />
-
-                <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
-
-                <x-input-error :messages="$errors->get('email')" class="mt-2" />
-            </div>
-
-            
-            <div class="mt-4">
-                <x-input-label for="password" :value="__('Password')" />
-
-                <x-text-input id="password" class="block mt-1 w-full"
-                                type="password"
-                                name="password"
-                                required autocomplete="current-password" />
-
-                <x-input-error :messages="$errors->get('password')" class="mt-2" />
-            </div>
-
-            
-            <div class="block mt-4">
-                <label for="remember_me" class="inline-flex items-center">
-                    <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" name="remember">
-                    <span class="ml-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
-                </label>
-            </div>
-
-            <div class="flex items-center justify-end mt-4">
-                @if (Route::has('password.request'))
-                    <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">
-                        {{ __('Forgot your password?') }}
-                    </a>
-                @endif
-
-                <x-primary-button class="ml-3">
-                    {{ __('Log in') }}
-                </x-primary-button>
-            </div>
-        </form>
-    </x-auth-card>
-</x-guest-layout> -->

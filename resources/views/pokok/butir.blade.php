@@ -1,1 +1,3 @@
 Butir
+
+{{-- {!! QrCode::generate('/pokok/'); !!} --}}

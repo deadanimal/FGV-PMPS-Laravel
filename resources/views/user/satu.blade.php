@@ -1,6 +1,6 @@
 @extends('layouts.app')
  
-@section('title', 'Pokok')
+@section('title', 'Profil')
  
 @section('content')
 
@@ -10,7 +10,7 @@
 
 			<div class="header">
 				<h1 class="header-title">
-					Pokok
+					Profil
 				</h1>
 				<p class="header-subtitle">---</p>
 			</div>
