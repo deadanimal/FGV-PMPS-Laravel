@@ -24,6 +24,8 @@
 
 <body>
 
+	@include('sweetalert::alert')
+
 	<div class="wrapper">
 
 		<nav id="sidebar" class="sidebar">
@@ -44,29 +46,23 @@
 						</a>
 					</li>
 
+					@role('super-admin|admin')
+
 					<li class="sidebar-item">
 						<a class="sidebar-link" href="/pokok">
 							<span class="align-middle">Pokok</span>
 						</a>
-					</li>	
+					</li>
 					
-					<li class="sidebar-item">
-						<a class="sidebar-link" href="/tandan">
-							<span class="align-middle">Tandan</span>
-						</a>
-					</li>	
-					
-					<li class="sidebar-item">
-						<a class="sidebar-link" href="/profil">
-							<span class="align-middle">Profil</span>
-						</a>
-					</li>	    
+					@endrole
+			    
+					@role('super-admin')
 					
 					<li class="sidebar-item">
 						<a class="sidebar-link" href="/user">
 							<span class="align-middle">User</span>
 						</a>
-					</li>						
+					</li>		
 
                     <li class="sidebar-header">
 						Mobile
@@ -106,7 +102,9 @@
 						<a class="sidebar-link" href="/tugasan">
 							<span class="align-middle">Tugasan</span>
 						</a>
-					</li>	                    
+					</li>	
+					
+					@endrole
                                  
 
 
@@ -126,8 +124,9 @@
 						<li class="nav-item dropdown ms-lg-2">
 							<a class="nav-link dropdown-toggle position-relative" href="#" id="userDropdown" data-bs-toggle="dropdown">
 								<i class="align-middle fas fa-cog"></i>
-							</a>
+							</a>											
 							<div class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">								
+								<a class="dropdown-item" href="/profil"><i class="align-middle me-1 fas fa-fw fa-user"></i>Profil</a>
 								<a class="dropdown-item" href="/logout"><i class="align-middle me-1 fas fa-fw fa-arrow-alt-circle-right"></i> Sign Out</a>
 							</div>
 						</li>

@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Tandan extends Model
 {
     use HasFactory;
+
+    public function pokok() {
+        return $this->belongsTo(Pokok::class);
+    }         
 }

@@ -12,13 +12,13 @@
 				<h1 class="header-title">
 					Dashboard
 				</h1>
-				<p class="header-subtitle">---</p>
+				{{-- <p class="header-subtitle">---</p> --}}
 			</div>
 
 			<div class="row">
 
 
-				<div class="col-xl-5">
+				{{-- <div class="col-xl-5">
 							<div class="card">
 								<div class="card-header">
 									<h5 class="card-title">- - -</h5>
@@ -28,7 +28,7 @@
 							
 								</div>
 							</div>								
-				</div>					
+				</div>					 --}}
 
 			</div>	
 		
