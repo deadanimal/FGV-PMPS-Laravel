@@ -13,6 +13,10 @@
                     Pokok
                 </h1>
                 {{-- <p class="header-subtitle">---</p> --}}
+
+                <div class="mb-3 col-md-6">
+                    {!! QrCode::generate(Request::url('https://fgv-pmps.prototype.com.my/pokok/{{ $pokok->id }}')); !!}
+                </div>                    
             </div>
 
             <div class="row">
@@ -98,7 +102,7 @@
                                 @csrf
 
                                 <input type="hidden" name="pokok_id" value="{{ $pokok->id }}">
-                                <div class="row">
+                                <div class="row">                                
 
                                     <div class="mb-3 col-md-6">
                                         <label>No Daftar</label>
