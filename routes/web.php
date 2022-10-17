@@ -24,7 +24,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('', [UserController::class, 'dashboard']);
     Route::get('dashboard', [UserController::class, 'dashboard']);
     Route::get('profil', [UserController::class, 'profil']); 
-    Route::put('profil/katalaluan', [UserController::class, 'kemaskini_katalaluan']);
+    Route::put('user/{id}/katalaluan', [UserController::class, 'kemaskini_katalaluan']);
 
     Route::get('user', [UserController::class, 'senarai_user']);
     Route::get('user/{id}', [UserController::class, 'satu_user']);
