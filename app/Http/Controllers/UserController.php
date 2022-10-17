@@ -79,7 +79,8 @@ class UserController extends Controller
     
     public function kemaskini_katalaluan(Request $request) {
 
-        $user = User::find($request->user_id);
+        $id = (int)$request->route('id'); 
+        $user = User::find($id);
         $user->password = Hash::make($request->password);
         $user->save();
 
