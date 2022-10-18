@@ -10,7 +10,7 @@
 
             <div class="header">
                 <h1 class="header-title">
-                    User: {{$user->name}}
+                    User: {{ $user->name }}
                 </h1>
                 <p class="header-subtitle">---</p>
             </div>
@@ -29,7 +29,7 @@
                         </div>
                         <div class="card-body">
 
-                            <form action="/user/{{ $user->id}}" method="POST">
+                            <form action="/user/{{ $user->id }}" method="POST">
                                 @csrf
                                 @method('PUT')
 
@@ -37,24 +37,27 @@
 
                                     <div class="mb-3 col-md-6">
                                         <label>Nama</label>
-                                        <input type="text" class="form-control" id="name" name="name" value="{{$user->name}}">
-									</div>
+                                        <input type="text" class="form-control" id="name" name="name"
+                                            value="{{ $user->name }}">
+                                    </div>
 
                                     <div class="mb-3 col-md-6">
                                         <label>Email</label>
-                                        <input type="email" class="form-control" id="email" name="email" value="{{$user->email}}">
+                                        <input type="email" class="form-control" id="email" name="email"
+                                            value="{{ $user->email }}">
                                     </div>
 
                                     <div class="mb-3 col-md-6">
                                         <label>No Kakitangan</label>
-                                        <input type="text" class="form-control" id="noKakitangan" name="noKakitangan" value="{{$user->no_kakitangan}}">
+                                        <input type="text" class="form-control" id="noKakitangan" name="noKakitangan"
+                                            value="{{ $user->no_kakitangan }}">
                                     </div>
-         
-{{-- 
+
+                                    {{-- 
                                     <div class="mb-3 col-md-6">
                                         <label>Role</label>
                                         <select class="form-select" id="role_id" name="role_id">
-											@foreach($roles as $role)
+											@foreach ($roles as $role)
 												<option value="{{$role->id}}">{{$role->display_name}}</option>
 											@endforeach                                        
                                         </select>
@@ -73,7 +76,7 @@
 
 
 
-            </div>            
+            </div>
 
             <div class="row">
 
@@ -93,14 +96,14 @@
                             <form action="/user/{{ $user->id }}/katalaluan" method="POST">
                                 @csrf
                                 @method('PUT')
-                                
+
 
                                 <div class="row">
 
-									<div class="mb-3 col">
+                                    <div class="mb-3 col">
                                         <label>Kata Laluan</label>
                                         <input type="password" class="form-control" id="password" name="password">
-                                    </div>									
+                                    </div>
 
                                     {{-- <div class="mb-3 col-md-6">
                                         <label>Kitaran</label>
@@ -141,6 +144,40 @@
 
 
 
+            </div>
+
+            <div class="row">
+                <div class="col">
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title">Senarai Log</h5>
+                            {{-- <h6 class="card-subtitle text-muted">- - -</h6> --}}
+                        </div>
+                        <div class="card-body">
+                            <table class="table table-striped table-sm log-datatable mb-5">
+                                <thead>
+                                    <tr>
+                                        <th>Tarikh</th>
+                                        <th>Aktiviti</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($activities as $activity)
+                                        <tr>
+                                            <td>{{ $activity->created_at }}</td>
+                                            <td>{{ $activity->description }}</td>
+                                        </tr>
+                                    @endforeach
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+
+
+                </div>
             </div>
 
 

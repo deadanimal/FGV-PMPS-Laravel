@@ -15,7 +15,7 @@
                 {{-- <p class="header-subtitle">---</p> --}}
 
                 <div class="mb-3 col-md-6">
-                    {!! QrCode::generate(Request::url('https://fgv-pmps.prototype.com.my/tandan/{{ $tandan->id }}')); !!}
+                    {!! QrCode::generate(Request::url('https://fgv-pmps.prototype.com.my/pokok/{{ $tandan->pokok->id }}/tandan/{{ $tandan->id }}')); !!}
                 </div>                  
             </div>
 
@@ -34,7 +34,7 @@
                         <div class="card-body">
 
 			
-                            <form action="/pokok/{{$tandan->pokok->id}}/tandan" method="POST">
+                            <form action="/pokok/{{$tandan->pokok->id}}/tandan/{{$tandan->id}}" method="POST">
                                 @csrf
                                 @method('PUT')
 
@@ -75,6 +75,7 @@
                                 </div>
 
 								<button type="submit" class="btn btn-primary">Kemaskini Tandan</button>
+                                <a href="/pokok/{{$tandan->pokok->id}}/tandan/{{$tandan->id}}/buang-qr"><button type="button" class="btn btn-danger">Buang Tandan</button></a>
                             </form>
 
 

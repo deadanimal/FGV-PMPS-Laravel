@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
+use Spatie\Activitylog\Models\Activity;
 
 use App\Models\User;
 use App\Models\Role;
@@ -58,7 +59,8 @@ class UserController extends Controller
     public function satu_user(Request $request) {
         $id = (int)$request->route('id'); 
         $user = User::find($id);
-        return view('user.satu', compact('user'));
+        $activities = Activity::where('causer_id', $id)->get();
+        return view('user.satu', compact('user','activities'));
     }        
 
     public function cipta_user(Request $request)

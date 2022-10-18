@@ -83,6 +83,7 @@
                                 </div>
 
 								<button type="submit" class="btn btn-primary">Kemaskini</button>
+                                <a href="/pokok/{{$pokok->id}}/buang"><button type="button" class="btn btn-danger">Buang</button></a>
                             </form>
 
 
@@ -137,7 +138,7 @@
 
                                 </div>
 
-								<button type="submit" class="btn btn-primary">Cipta Tandan</button>
+								<button type="submit" class="btn btn-primary">Cipta Tandan</button>                                
                             </form>
 
 

@@ -15,7 +15,7 @@ class TandanController extends Controller
 
     public function senarai_tandan(Request $request)
     {
-        $tandans = Tandan::all();
+        $tandans = Tandan::where('aktif', true)->get();
         if($request->ajax()) {
             return Datatables::collection($tandans)
             ->addIndexColumn() 
@@ -38,7 +38,10 @@ class TandanController extends Controller
     public function senarai_tandan_di_pokok(Request $request)
     {
         $id = (int)$request->route('id'); 
-        $tandans = Tandan::where('pokok_id', $id)->get();
+        $tandans = Tandan::where([
+            ['pokok_id', '=', $id],
+            ['aktif', '=', true],
+        ])->get();
         // if($request->ajax()) {
             return Datatables::collection($tandans)
             ->addIndexColumn() 
@@ -84,18 +87,49 @@ class TandanController extends Controller
             ->log('Cipta tandan'); 
 
         return back();
-    }      
+    }    
+    
+    public function kemaskini_tandan(Request $request)
+    {
+        $id = (int)$request->route('tandan_id'); 
+        $user = $request->user();
+        $user_id = $user->id;
+
+        $tandan = Tandan::find($id);    
+
+        $tandan->no_daftar = $request->noDaftar;
+        $tandan->kitaran = $request->kitaran;
+        $tandan->deskripsi_kitaran = $request->deskripsiKitaran;
+        $tandan->status_tandan = $request->statusTandan;
+        $tandan->catatan = $request->catatan;
+        $tandan->umur = $request->umur;
+
+        $tandan->save();
+
+        activity()
+            ->performedOn($tandan)
+            ->causedBy($user)
+            ->log('Kemaskini tandan'); 
+
+        return back();
+    }       
 
     public function buang_tandan(Request $request)
     {
+        $id = (int)$request->route('tandan_id'); 
         $tandan = Tandan::find($id);
-        return view('tandan.butir', compact('tandan'));
+        $tandan->aktif = false;
+        $tandan->save();
+        $url = '/tandan';
+        return redirect($url);
     }  
-    
-    public function sah_buang_tandan(Request $request)
+
+    public function buang_tandan_qr(Request $request)
     {
-        $tandan = Tandan::find($id);
-        return view('tandan.butir', compact('tandan'));
+        $id = (int)$request->route('tandan_id'); 
+        $tandan = Tandan::find($id);        
+        return view('tandan.buang_qr', compact('tandan'));
     }      
+         
          
 }

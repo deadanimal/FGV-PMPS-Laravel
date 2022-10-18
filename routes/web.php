@@ -36,10 +36,13 @@ Route::middleware(['auth'])->group(function () {
     Route::post('pokok', [PokokController::class, 'cipta_pokok']);
     Route::get('pokok/{id}', [PokokController::class, 'satu_pokok']);
     Route::put('pokok/{id}', [PokokController::class, 'kemaskini_pokok']); 
+    Route::get('pokok/{id}/buang', [PokokController::class, 'buang_pokok']);
 
     Route::get('pokok/{id}/tandan', [TandanController::class, 'senarai_tandan_di_pokok']);    
     Route::get('pokok/{id}/tandan/{tandan_id}', [TandanController::class, 'satu_tandan']);
     Route::put('pokok/{id}/tandan/{tandan_id}', [TandanController::class, 'kemaskini_tandan']);
+    Route::get('pokok/{id}/tandan/{tandan_id}/buang-qr', [TandanController::class, 'buang_tandan_qr']);
+    Route::get('pokok/{id}/tandan/{tandan_id}/buang', [TandanController::class, 'buang_tandan']);
 
     Route::get('tandan', [TandanController::class, 'senarai_tandan']);    
     Route::post('tandan', [TandanController::class, 'cipta_tandan']);

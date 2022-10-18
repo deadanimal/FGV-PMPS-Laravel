@@ -15,7 +15,7 @@ class PokokController extends Controller
 
     public function senarai_pokok(Request $request)
     {
-        $pokoks = Pokok::all();
+        $pokoks = Pokok::where('aktif', true)->get();
 
         if($request->ajax()) {
             return Datatables::collection($pokoks)
@@ -67,7 +67,7 @@ class PokokController extends Controller
         return back();
     }  
     
-    public function ubah_pokok(Request $request) {
+    public function kemaskini_pokok(Request $request) {
 
         $id = (int)$request->route('id'); 
         $pokok = Pokok::find($id);
@@ -89,6 +89,23 @@ class PokokController extends Controller
             ->log('Kemaskini pokok');  
 
         return back();
-    }      
+    }     
+    
+    public function buang_pokok(Request $request) {
+
+        $id = (int)$request->route('id'); 
+        $pokok = Pokok::find($id);
+        $user = $request->user(); 
+        $pokok->aktif = false;
+        $pokok->save();      
+        
+        activity()
+            ->performedOn($pokok)
+            ->causedBy($user)
+            ->log('Buang pokok');  
+
+        $url = '/pokok';
+        return redirect($url);
+    }          
    
 }
