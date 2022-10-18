@@ -53,6 +53,12 @@
 							<span class="align-middle">Pokok</span>
 						</a>
 					</li>
+
+					<li class="sidebar-item">
+						<a class="sidebar-link" href="/tandan">
+							<span class="align-middle">Tandan</span>
+						</a>
+					</li>					
 					
 					@endrole
 			    

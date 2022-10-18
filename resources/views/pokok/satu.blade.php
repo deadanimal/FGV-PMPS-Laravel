@@ -98,7 +98,7 @@
                         <div class="card-body">
 
 			
-                            <form action="/pokok/{{$pokok->id}}/tandan" method="POST">
+                            <form action="/tandan" method="POST">
                                 @csrf
 
                                 <input type="hidden" name="pokok_id" value="{{ $pokok->id }}">
@@ -130,7 +130,7 @@
                                     </div>
 
                                     <div class="mb-3 col-md-6">
-                                        <label>umur</label>
+                                        <label>Umur</label>
                                         <input type="number" class="form-control" id="umur" name="umur">
                                     </div>
 

@@ -12,7 +12,26 @@ use App\Models\Tandan;
 class TandanController extends Controller
 {
 
+
     public function senarai_tandan(Request $request)
+    {
+        $tandans = Tandan::all();
+        if($request->ajax()) {
+            return Datatables::collection($tandans)
+            ->addIndexColumn() 
+            ->addColumn('link', function (Tandan $tandan) {
+                $url = '/pokok/'.$tandan->pokok->id.'/tandan/'.$tandan->id;
+                $html_button = '<a href="'.$url.'"><button class="btn btn-primary">Lihat</button></a>';
+                return $html_button;
+            })            
+            ->rawColumns(['link'])               
+            ->make(true);                  
+        }        
+        return view('tandan.senarai', compact('tandans'));
+    }
+    
+    
+    public function senarai_tandan_di_pokok(Request $request)
     {
         $id = (int)$request->route('id'); 
         $tandans = Tandan::where('pokok_id', $id)->get();
@@ -61,7 +80,7 @@ class TandanController extends Controller
             ->log('Cipta tandan'); 
 
         return back();
-    }  
+    }      
 
     public function buang_tandan(Request $request)
     {
