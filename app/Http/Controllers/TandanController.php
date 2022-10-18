@@ -19,6 +19,10 @@ class TandanController extends Controller
         if($request->ajax()) {
             return Datatables::collection($tandans)
             ->addIndexColumn() 
+            ->addColumn('no_pokok', function (Tandan $tandan) {                
+                $html_statement = $tandan->pokok->no_pokok;
+                return $html_statement;
+            })               
             ->addColumn('link', function (Tandan $tandan) {
                 $url = '/pokok/'.$tandan->pokok->id.'/tandan/'.$tandan->id;
                 $html_button = '<a href="'.$url.'"><button class="btn btn-primary">Lihat</button></a>';

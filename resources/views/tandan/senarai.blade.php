@@ -37,7 +37,7 @@
                                     <div class="mb-3 col-md-6">
                                         <label>Pokok ID</label>
                                         <input type="text" class="form-control" id="pokok_id" name="pokok_id">
-                                    </div>                                    
+                                    </div>
 
                                     <div class="mb-3 col-md-6">
                                         <label>No Daftar</label>
@@ -51,7 +51,8 @@
 
                                     <div class="mb-3 col-md-6">
                                         <label>Deskripsi Kitaran</label>
-                                        <input type="text" class="form-control" id="deskripsiKitaran" name="deskripsiKitaran">
+                                        <input type="text" class="form-control" id="deskripsiKitaran"
+                                            name="deskripsiKitaran">
                                     </div>
 
                                     <div class="mb-3 col-md-6">
@@ -89,25 +90,24 @@
 
                     <div class="card">
                         <div class="card-header">
-                            <h5 class="card-title">Senarai Pokok</h5>
+                            <h5 class="card-title">Senarai Tandan</h5>
                             <h6 class="card-subtitle text-muted">- - -</h6>
                         </div>
                         <div class="card-body">
-                            <table class="table table-striped table-sm pokok-datatable mb-5">
+                            <table class="table table-striped table-sm tandan-datatable mb-5">
                                 <thead>
                                     <tr>
                                         <th>No Pokok</th>
-                                        <th>Jantina</th>
-                                        <th>Baka</th>
-                                        <th>Progeny</th>
-                                        <th>Blok</th>
-                                        <th>Trial</th>
-                                        <th>Status</th>
+                                        <th>No Daftar</th>
+                                        <th>Kitaran</th>
+                                        <th>Deskripsi Kitaran</th>
+                                        <th>Status Tandan</th>
+                                        <th>Catatan</th>
+                                        <th>Umur</th>
                                         <th>Link</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-
 
                                 </tbody>
                             </table>
@@ -131,41 +131,41 @@
     <script type="text/javascript">
         $(function() {
 
-            var table = $('.pokok-datatable').DataTable({
+            var table = $('.tandan-datatable').DataTable({
                 processing: true,
                 serverSide: true,
                 responsive: true,
                 order: [
                     [0, 'asc']
                 ],
-                ajax: "/pokok",
+                ajax: "/tandan",
                 columns: [{
                         data: 'no_pokok',
                         name: 'no_pokok'
                     },
                     {
-                        data: 'jantina',
-                        name: 'jantina'
+                        data: 'no_daftar',
+                        name: 'no_daftar'
                     },
                     {
-                        data: 'baka',
-                        name: 'baka'
+                        data: 'kitaran',
+                        name: 'kitaran'
                     },
                     {
-                        data: 'progeny',
-                        name: 'progeny'
+                        data: 'deskripsi_kitaran',
+                        name: 'deskripsi_kitaran'
                     },
                     {
-                        data: 'blok',
-                        name: 'blok'
+                        data: 'status_tandan',
+                        name: 'status_tandan'
                     },
                     {
-                        data: 'trial',
-                        name: 'trial'
+                        data: 'catatan',
+                        name: 'catatan'
                     },
                     {
-                        data: 'status_pokok',
-                        name: 'status_pokok'
+                        data: 'umur',
+                        name: 'umur'
                     },
                     {
                         data: 'link',
