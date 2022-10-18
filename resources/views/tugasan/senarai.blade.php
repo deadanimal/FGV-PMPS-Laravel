@@ -104,6 +104,7 @@
                                 <thead>
                                     <tr>
                                         <th>Tarikh Kerja</th>
+                                        <th>Tandan ID</th>
                                         <th>Jenis</th>
                                         <th>No</th>
                                         <th>Nama</th>
@@ -147,6 +148,10 @@
                         data: 'tarikh_kerja_mula',
                         name: 'tarikh_kerja_mula'
                     },
+                    {
+                        data: 'tandan_id',
+                        name: 'tandan_id'
+                    },                    
                     {
                         data: 'jenis',
                         name: 'jenis'

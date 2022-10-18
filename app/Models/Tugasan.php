@@ -12,4 +12,13 @@ class Tugasan extends Model
     public function tandan() {
         return $this->belongsTo(Tandan::class);
     }       
+
+    public function assignee() {
+        return $this->belongsTo(User::class, 'assignee_id');
+    }       
+    
+    public function pengesah() {
+        return $this->belongsTo(User::class, 'pengesah_id');
+    }        
+     
 }

@@ -13,17 +13,17 @@
                     Tugasan
                 </h1>
                 {{-- <p class="header-subtitle">---</p> --}}
-                
+
             </div>
 
             <div class="row">
 
 
-                <div class="col">
+                <div class="col-6">
                     {{-- <img src="{!!$message->embedData(QrCode::format('png')->generate('Embed me into an e-mail!'), 'QrCode.png', 'image/png')!!}"> --}}
 
-             
-                    
+
+
                     <div class="card">
                         <div class="card-header">
                             <h5 class="card-title">Tugasan Tandan</h5>
@@ -31,69 +31,62 @@
                         </div>
                         <div class="card-body">
 
-			
-                            <form action="/tugasan/{{$tugasan->id}}" method="POST">
-                                @csrf
+
+                            <form>
 
                                 <div class="row">
 
-                                    <div class="mb-3 col-md-3">
+                                    <div class="mb-3 col-md-6">
                                         <label>Jenis Kerja</label>
-                                        <select class="form-control" id="jenisKerja" name="jenisKerja">
-                                            <option value="bagging">Bagging</option>
-                                            <option value="control">Control Pollination</option>
-                                            <option value="quality">Quality Control</option>
-                                            <option value="harvest">Harvest</option>
-                                            <option value="pollen">Pollen Preparation</option>
-                                            <option value="pollen-usage">Pollen Usage</option>
-                                        </select>                                        
+                                        <input type="text" class="form-control" value="{{ $tugasan->jenis }}" readonly>
                                     </div>
 
 
-                                    <div class="mb-3 col-md-3">
+                                    <div class="mb-3 col-md-6">
                                         <label>Tarikh Mula Kerja</label>
-                                        <input type="date" class="form-control" id="tarikh_kerja_mula" name="tarikh_kerja_mula">
-                                    </div>                                         
+                                        <input type="date" class="form-control" value="{{ $tugasan->tarikh_kerja_mula }}"
+                                            readonly>
+                                    </div>
 
                                     <div class="mb-3 col-md-6">
                                         <label>No Tugasan</label>
-                                        <input type="text" class="form-control" id="kitaran" name="kitaran">
+                                        <input type="text" class="form-control" value="{{ $tugasan->no_tugasan }}" readonly>
                                     </div>
-                                    
+
                                     <div class="mb-3 col-md-6">
                                         <label>Nama Tugasan</label>
-                                        <input type="text" class="form-control" id="kitaran" name="kitaran">
-                                    </div>                                    
-
-                                    <div class="mb-3 col-md-6">
-                                        <label>Pekerja ID</label>
-                                        <input type="text" class="form-control" id="pekerjaId" name="pekerjaId">
+                                        <input type="text" class="form-control" value="{{ $tugasan->nama_tugasan }}" readonly>
                                     </div>
 
                                     <div class="mb-3 col-md-6">
-                                        <label>Supervisor ID</label>
-                                        <input type="text" class="form-control" id="s" name="s">
+                                        <label>Pekerja</label>
+                                        <input type="text" class="form-control" value="{{ $tugasan->assignee->name }}" readonly>
+                                    </div>
+
+                                    <div class="mb-3 col-md-6">
+                                        <label>Supervisor</label>
+                                        <input type="text" class="form-control" value="{{ $tugasan->pengesah->name }}" readonly>
                                     </div>
 
 
 
                                 </div>
-
-								<button type="submit" class="btn btn-primary">Cipta Tugasan</button>
                             </form>
 
 
 
                         </div>
-                    </div>                       
+                    </div>
 
                 </div>
 
 
-
             </div>
 
- 
+            <div class="row">
+            </div>
+
+
 
 
 
