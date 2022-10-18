@@ -13,6 +13,10 @@
                     Tandan
                 </h1>
                 {{-- <p class="header-subtitle">---</p> --}}
+
+                <div class="mb-3 col-md-6">
+                    {!! QrCode::generate(Request::url('https://fgv-pmps.prototype.com.my/tandan/{{ $tandan->id }}')); !!}
+                </div>                  
             </div>
 
             <div class="row">

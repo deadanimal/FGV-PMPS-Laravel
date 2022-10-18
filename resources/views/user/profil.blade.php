@@ -46,7 +46,7 @@
 
 									<div class="mb-3 col-md-6">
                                         <label>Kata Laluan</label>
-                                        <input type="password" class="form-control" id="katalaluan" name="katalaluan">
+                                        <input type="password" class="form-control" id="password" name="password">
                                     </div>									
 
                                     {{-- <div class="mb-3 col-md-6">

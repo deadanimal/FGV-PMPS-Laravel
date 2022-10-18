@@ -30,6 +30,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('user/{id}', [UserController::class, 'satu_user']);
     Route::post('user', [UserController::class, 'cipta_user']);
     Route::put('user/{id}', [UserController::class, 'kemaskini_user']);     
+    Route::put('user/{id}/katalaluan', [UserController::class, 'kemaskini_katalaluan_user']);
 
     Route::get('pokok', [PokokController::class, 'senarai_pokok']);
     Route::post('pokok', [PokokController::class, 'cipta_pokok']);

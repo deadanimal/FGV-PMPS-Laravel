@@ -57,8 +57,13 @@ class PokokController extends Controller
         $pokok->user_id = $user_id;
 
         $pokok->save();
+
+        activity()
+            ->performedOn($pokok)
+            ->causedBy($user)
+            ->log('Cipta pokok');               
         
-        Alert::success('Pokok dicipta', 'Pokok dicipta dengan berjaya');
+        //Alert::success('Pokok dicipta', 'Pokok dicipta dengan berjaya');
         return back();
     }  
     
@@ -66,6 +71,7 @@ class PokokController extends Controller
 
         $id = (int)$request->route('id'); 
         $pokok = Pokok::find($id);
+        $user = $request->user();
         
         $pokok->no_pokok = $request->noPokok;
         $pokok->jantina = $request->jantina;
@@ -75,7 +81,13 @@ class PokokController extends Controller
         $pokok->trial = $request->trial;
         $pokok->status_pokok = $request->statusPokok;
 
-        $pokok->save();        
+        $pokok->save();     
+        
+        activity()
+            ->performedOn($pokok)
+            ->causedBy($user)
+            ->log('Kemaskini pokok');  
+
         return back();
     }      
    

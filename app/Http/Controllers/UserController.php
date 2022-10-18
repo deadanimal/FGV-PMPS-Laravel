@@ -81,8 +81,13 @@ class UserController extends Controller
 
         $id = $request->user()->id;
         $user = User::find($id);
-        $user->password = Hash::make($request->katalaluan);
+        $user->password = Hash::make($request->password);
         $user->save();
+
+        activity()
+            ->performedOn($user)
+            ->causedBy($user)
+            ->log('Ubah katalaluan');        
 
 
         return back();
@@ -95,6 +100,21 @@ class UserController extends Controller
         $user->name = $request->name;
         $user->email = $request->email;
         $user->no_kakitangan = $request->noKakitangan;
+        $user->save();
+
+        activity()
+            ->performedOn($user)
+            ->causedBy($request->user())
+            ->log('Kemaskini user lain');         
+
+        return back();
+    }    
+    
+    public function kemaskini_katalaluan_user(Request $request)
+    {
+        $id = (int)$request->route('id'); 
+        $user = User::find($id);
+        $user->password = Hash::make($request->password);
         $user->save();
 
         return back();

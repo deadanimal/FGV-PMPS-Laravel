@@ -54,6 +54,12 @@ class TandanController extends Controller
         $tandan->umur = $request->umur;
 
         $tandan->save();
+
+        activity()
+            ->performedOn($tandan)
+            ->causedBy($user)
+            ->log('Cipta tandan'); 
+
         return back();
     }  
 
