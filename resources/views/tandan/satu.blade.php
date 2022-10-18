@@ -13,16 +13,20 @@
                     Tandan
                 </h1>
                 {{-- <p class="header-subtitle">---</p> --}}
-
-                <div class="mb-3 col-md-6">
-                    {!! QrCode::generate(Request::url('https://fgv-pmps.prototype.com.my/pokok/{{ $tandan->pokok->id }}/tandan/{{ $tandan->id }}')); !!}
-                </div>                  
+            
             </div>
 
             <div class="row">
 
+                <div class="mb-3 col-4">
+                    <div class="card">
+                        <div class="card-body">
+                        {!! QrCode::size(300)->generate($url_qr); !!}
+                        </div>
+                    </div>
+                </div>      
 
-                <div class="col">
+                <div class="col-8">
                     {{-- <img src="{!!$message->embedData(QrCode::format('png')->generate('Embed me into an e-mail!'), 'QrCode.png', 'image/png')!!}"> --}}
 
 
@@ -141,6 +145,7 @@
                                 </div>
 
 								<button type="submit" class="btn btn-primary">Cipta Tugasan</button>
+                                <a href="/pokok/{{$tandan->pokok->id}}/tandan/{{ $tandan->id}}/tugasan"><button type="button" class="btn btn-warning">Senarai Tugasan</button></a>
                             </form>
 
 

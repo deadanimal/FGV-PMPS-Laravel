@@ -86,19 +86,6 @@ class TugasanController extends Controller
         $url = '/tugasan/'.$tugasan->id;
         return Redirect($url);        
     }     
-    
-    public function siap_tugasan(Request $request)
-    {
-        $user_id = $request->user()->id;
-        $url = '/tugasan/'.$tugasan->id;
-        return Redirect($url);        
-    }      
-    
-
-    public function sah_tugasan(Request $request)
-    {
-        $user_id = $request->user()->id;
-        $url = '/tugasan/'.$tugasan->id;
-        return Redirect($url);        
-    }    
+        
+  
 }

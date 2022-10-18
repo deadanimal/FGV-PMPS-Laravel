@@ -61,7 +61,8 @@ class TandanController extends Controller
     {
         $id = (int)$request->route('tandan_id'); 
         $tandan = Tandan::find($id);
-        return view('tandan.satu', compact('tandan'));
+        $url_qr = 'https://fgv-pmps.prototype.com.my/pokok/'.$tandan->pokok->id.'/tandan/'.$tandan->id.'/tugasan';
+        return view('tandan.satu', compact('tandan', 'url_qr'));
     }   
 
     public function cipta_tandan(Request $request)
@@ -130,7 +131,15 @@ class TandanController extends Controller
         $id = (int)$request->route('tandan_id'); 
         $tandan = Tandan::find($id);        
         return view('tandan.buang_qr', compact('tandan'));
-    }          
+    }    
+    
+    public function tugasan_tandan(Request $request)
+    {
+        $id = (int)$request->route('tandan_id'); 
+        $user_id = $request->user()->id;
+        $tugasans = Tugasan::where('tandan_id', $id)->get();
+        return view('tandan.tugasan', compact('tugasans'));      
+    }      
          
          
 }

@@ -37,7 +37,8 @@ class PokokController extends Controller
         $id = (int)$request->route('id'); 
         $pokok = Pokok::find($id);
         $tandans = Tandan::where('pokok_id', $pokok->id)->get();
-        return view('pokok.satu', compact('pokok', 'tandans'));
+        $url_qr = 'https://fgv-pmps.prototype.com.my/pokok/'.$pokok->id;
+        return view('pokok.satu', compact('pokok', 'tandans', 'url_qr'));
     }   
 
     public function cipta_pokok(Request $request)
