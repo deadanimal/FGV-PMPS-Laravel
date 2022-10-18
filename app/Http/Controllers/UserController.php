@@ -81,7 +81,7 @@ class UserController extends Controller
 
         $id = (int)$request->route('id'); 
         $user = User::find($id);
-        $user->password = Hash::make($request->password);
+        $user->password = Hash::make($request->katalaluan);
         $user->save();
 
 
