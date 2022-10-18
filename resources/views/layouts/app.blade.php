@@ -46,6 +46,12 @@
 						</a>
 					</li>
 
+					<li class="sidebar-item">
+						<a class="sidebar-link" href="/tugasan">
+							<span class="align-middle">Tugasan</span>
+						</a>
+					</li>						
+
 					@role('super-admin|admin')
 
 					<li class="sidebar-item">
@@ -69,46 +75,6 @@
 							<span class="align-middle">User</span>
 						</a>
 					</li>		
-
-                    <li class="sidebar-header">
-						Mobile
-					</li>					
-
-					<li class="sidebar-item">
-						<a class="sidebar-link" href="/bagging">
-							<span class="align-middle">Bagging</span>
-						</a>
-					</li>	
-					
-					<li class="sidebar-item">
-						<a class="sidebar-link" href="/control-pollination">
-							<span class="align-middle">Control Pollination</span>
-						</a>
-					</li>	
-                    
-					<li class="sidebar-item">
-						<a class="sidebar-link" href="/harvest">
-							<span class="align-middle">Harvest</span>
-						</a>
-					</li>						
-
-					<li class="sidebar-item">
-						<a class="sidebar-link" href="/pollen">
-							<span class="align-middle">Pollen</span>
-						</a>
-					</li>	                    
-					
-					<li class="sidebar-item">
-						<a class="sidebar-link" href="/quality-control">
-							<span class="align-middle">Quality Control</span>
-						</a>
-					</li>	
-
-					<li class="sidebar-item">
-						<a class="sidebar-link" href="/tugasan">
-							<span class="align-middle">Tugasan</span>
-						</a>
-					</li>	
 					
 					@endrole
                                  

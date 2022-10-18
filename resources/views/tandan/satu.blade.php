@@ -81,7 +81,72 @@
 
 
                         </div>
-                    </div>                    
+                    </div>              
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title">Tugasan Tandan</h5>
+                            {{-- <h6 class="card-subtitle text-muted">- - - </h6> --}}
+                        </div>
+                        <div class="card-body">
+
+			
+                            <form action="/tugasan" method="POST">
+                                @csrf
+
+                                <input type="hidden" value="{{ $tandan->id }}" name="tandan_id">
+
+                                <div class="row">
+
+                                    <div class="mb-3 col-md-3">
+                                        <label>Jenis Kerja</label>
+                                        <select class="form-control" id="jenis" name="jenis">
+                                            <option value="bagging">Bagging</option>
+                                            <option value="control">Control Pollination</option>
+                                            <option value="quality">Quality Control</option>
+                                            <option value="harvest">Harvest</option>
+                                            <option value="pollen">Pollen Preparation</option>
+                                            <option value="pollen-usage">Pollen Usage</option>
+                                        </select>                                        
+                                    </div>
+
+
+                                    <div class="mb-3 col-md-3">
+                                        <label>Tarikh Mula Kerja</label>
+                                        <input type="date" class="form-control" id="tarikh_kerja_mula" name="tarikh_kerja_mula">
+                                    </div>                                         
+
+                                    <div class="mb-3 col-md-6">
+                                        <label>No Tugasan</label>
+                                        <input type="text" class="form-control" id="no_tugasan" name="no_tugasan">
+                                    </div>
+                                    
+                                    <div class="mb-3 col-md-6">
+                                        <label>Nama Tugasan</label>
+                                        <input type="text" class="form-control" id="nama_tugasan" name="nama_tugasan">
+                                    </div>                                    
+
+                                    <div class="mb-3 col-md-6">
+                                        <label>Pekerja ID</label>
+                                        <input type="text" class="form-control" id="assignee_id" name="assignee_id">
+                                    </div>
+
+                                    <div class="mb-3 col-md-6">
+                                        <label>Supervisor ID</label>
+                                        <input type="text" class="form-control" id="pengesah_id" name="pengesah_id">
+                                    </div>
+
+
+
+                                </div>
+
+								<button type="submit" class="btn btn-primary">Cipta Tugasan</button>
+                            </form>
+
+
+
+                        </div>
+                    </div>                       
 
                 </div>
 

@@ -11,5 +11,9 @@ class Tandan extends Model
 
     public function pokok() {
         return $this->belongsTo(Pokok::class);
-    }         
+    }      
+    
+    public function tugasan() {
+        return $this->hasMany(Tugasan::class);
+    }       
 }

@@ -8,6 +8,7 @@ use Carbon\Carbon;
 
 use Illuminate\Http\Request;
 use App\Models\Tandan;
+use App\Models\Tugasan;
 
 class TandanController extends Controller
 {
@@ -129,7 +130,7 @@ class TandanController extends Controller
         $id = (int)$request->route('tandan_id'); 
         $tandan = Tandan::find($id);        
         return view('tandan.buang_qr', compact('tandan'));
-    }      
+    }          
          
          
 }
