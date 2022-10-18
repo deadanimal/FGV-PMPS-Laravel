@@ -38,7 +38,8 @@ class TugasanController extends Controller
     public function satu_tugasan($id)
     {
         $tugasan = Tugasan::findOrFail($id);
-        return view('tugasan.satu', compact('tugasan'));
+        $bagging = BaggingData::where('tugasan_id', $tugasan->id)->first();
+        return view('tugasan.satu', compact('tugasan', 'bagging'));
     }
 
     public function cipta_tugasan(Request $request)
@@ -98,6 +99,8 @@ class TugasanController extends Controller
 
         if($tugasan->jenis) {
 
+            $path = $request->file('upload')->store('fgv-pmps/images');
+
             $bagging = New BaggingData;
 
             $bagging->no_bagging = $request->no_bagging;
@@ -105,19 +108,11 @@ class TugasanController extends Controller
             $bagging->tandan_id = $tugasan->tandan->id;
             $bagging->catatan_bagging = $request->catatan_bagging;
             $bagging->tugasan_id = $tugasan->id;
+            $bagging->gambar = $path;
 
             $bagging->save();   
 
-            $path = $request->file('upload')->store('fgv-pmps/images');
-
-            $gambar = New Gambar;
-    
-            $gambar->nama = 'bagging';
-            $gambar->user_id = $user->id;
-            $gambar->uploadable_id = $bagging->id;
-            $gambar->uploadable_type = 'App\Models\BaggingData';
-            $gambar->jalan = $path;   
-            $gambar->save();            
+                        
                            
         }  
 
