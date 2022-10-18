@@ -51,6 +51,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('tugasan', [TugasanController::class, 'senarai_tugasan']);
     Route::get('tugasan/{id}', [TugasanController::class, 'satu_tugasan']);
     Route::post('tugasan', [TugasanController::class, 'cipta_tugasan']);
+    Route::post('tugasan/{id}/kerja', [TugasanController::class, 'siap_tugasan']);
+    Route::post('tugasan/{id}/sah', [TugasanController::class, 'sah_tugasan']);
     
   
     

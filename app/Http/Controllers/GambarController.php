@@ -13,11 +13,7 @@ class GambarController extends Controller
         $user = $request->user();
         $user_id = $user->id;
 
-        $request->validate([
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:4096',
-        ]);
-        $image_name = time().'.'.$request->image->extension();  
-        $request->image->move(public_path('images'), $image_name);
+        $path = $request->file('upload')->store('fgv-pmps/images');
 
         $gambar = New Gambar;
 
@@ -25,15 +21,14 @@ class GambarController extends Controller
         $gambar->user_id = $request->user_id;
         $gambar->uploadable_id = $request->uploadable_id;
         $gambar->uploadable_type = $request->uploadable_type;   
-        $gambar->jalan = $image_name;   
+        $gambar->jalan = $path;   
         $gambar->save();
 
         activity()
         ->causedBy($user)
         ->performedOn($gambar)
-        ->log('Ubah');        
+        ->log('Upload gambar');        
 
-        return back()
-            ->with('success','You have successfully upload image.');
+        return back();
     }  
 }
