@@ -18,7 +18,7 @@
 
             <div class="row">
 
-                <div class="mb-3 col-4">
+                <div class="col-sm-12 col-xl-4">
                     <div class="card">
                         <div class="card-body">
                         {!! QrCode::size(300)->generate($url_qr); !!}
@@ -26,7 +26,7 @@
                     </div>
                 </div>      
 
-                <div class="col-8">
+                <div class="col-sm-12 col-xl-8">
                     {{-- <img src="{!!$message->embedData(QrCode::format('png')->generate('Embed me into an e-mail!'), 'QrCode.png', 'image/png')!!}"> --}}
 
 
