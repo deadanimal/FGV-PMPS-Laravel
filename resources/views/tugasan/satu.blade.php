@@ -88,67 +88,100 @@
             </div>
 
             @if ($tugasan->jenis == 'bagging')
+
                 <div class="row">
 
-                    <div class="col-6">
+                    @if ($bagging)
+                        <div class="col-6">
 
-                        <div class="card">
-                            <div class="card-header">
-                                <h5 class="card-title">Tugasan Bagging</h5>
-                                {{-- <h6 class="card-subtitle text-muted">- - - </h6> --}}
-                            </div>
-                            <div class="card-body">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="card-title">Tugasan Bagging</h5>
+                                    {{-- <h6 class="card-subtitle text-muted">- - - </h6> --}}
+                                </div>
+                                <div class="card-body">
 
-                                <form action="/tugasan/{{ $tugasan->id }}/kerja" enctype="multipart/form-data"
-                                    method="POST">
-                                    @csrf
-                                    <div class="form-group mb-3">
-                                        <input type="file" name="upload" id="upload">
-                                    </div>
-                                    <div class="form-group mb-3">
-                                        <label for="title">No Bagging</label>
-                                        <input type="text" class="form-control" id="no_bagging" name="no_bagging"
-                                            required>
-                                    </div>
-                                    <div class="form-group mb-3">
-                                        <label for="title">Catatan</label>
-                                        <input type="text" class="form-control" id="catatan_bagging" name="catatan_bagging" required>
-                                    </div>
-                                    <button class="btn btn-primary">Siap Kerja</button>
-                                </form>
+                                    <form>
+                                        @csrf
+                                        <div class="form-group mb-3">
+                                            <label for="title">No Bagging</label>
+                                            <input type="text" class="form-control" value="{{$bagging->no_bagging}}" readonly>
+                                        </div>
+                                        <div class="form-group mb-3">
+                                            <label for="title">Catatan</label>
+                                            <input type="text" class="form-control" value="{{$bagging->catatan_bagging}}" readonly>
+                                        </div>
+                                    </form>
+
+                                </div>
 
                             </div>
 
                         </div>
 
-                    </div>
+                        <div class="col-6">
 
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="card-title">Siap Kerja</h5>
+                                    {{-- <h6 class="card-subtitle text-muted">- - - </h6> --}}
+                                </div>
+                                <div class="card-body">
+                                    <img src="https://pipeline-apps.sgp1.digitaloceanspaces.com/{{ $bagging->gambar }}" />
 
-                    <div class="col-6">
+                                    <form action="/tugasan/{{ $tugasan->id }}/sah" enctype="multipart/form-data"
+                                        method="POST">
+                                        @csrf
+                                        <div class="form-group mb-3">
+                                            <label for="title">Catatan</label>
+                                            <input type="text" class="form-control" id="catatan" name="catatan"
+                                                required>
+                                        </div>
+                                        <button class="btn btn-primary">Sah</button>
+                                    </form>
 
-                        <div class="card">
-                            <div class="card-header">
-                                <h5 class="card-title">Siap Kerja</h5>
-                                {{-- <h6 class="card-subtitle text-muted">- - - </h6> --}}
-                            </div>
-                            <div class="card-body">
-
-                                <form action="/tugasan/{{ $tugasan->id }}/sah" enctype="multipart/form-data"
-                                    method="POST">
-                                    @csrf
-                                    <div class="form-group mb-3">
-                                        <label for="title">Catatan</label>
-                                        <input type="text" class="form-control" id="catatan" name="catatan" required>
-                                    </div>
-                                    <button class="btn btn-primary">Sah</button>
-                                </form>
+                                </div>
 
                             </div>
 
                         </div>
+                    @else
+                        <div class="col-6">
 
-                    </div>                    
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="card-title">Tugasan Bagging</h5>
+                                    {{-- <h6 class="card-subtitle text-muted">- - - </h6> --}}
+                                </div>
+                                <div class="card-body">
+
+                                    <form action="/tugasan/{{ $tugasan->id }}/kerja" enctype="multipart/form-data"
+                                        method="POST">
+                                        @csrf
+                                        <div class="form-group mb-3">
+                                            <input type="file" name="upload" id="upload">
+                                        </div>
+                                        <div class="form-group mb-3">
+                                            <label for="title">No Bagging</label>
+                                            <input type="text" class="form-control" id="no_bagging" name="no_bagging"
+                                                required>
+                                        </div>
+                                        <div class="form-group mb-3">
+                                            <label for="title">Catatan</label>
+                                            <input type="text" class="form-control" id="catatan_bagging"
+                                                name="catatan_bagging" required>
+                                        </div>
+                                        <button class="btn btn-primary">Siap Kerja</button>
+                                    </form>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                    @endif
                 </div>
+            @elseif (count($records) > 1)
             @endif
 
         </div>
